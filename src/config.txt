@@ -1,0 +1,8 @@
+path=D:\Code\TAs_automate\Group_Presentation\docs
+input_file=feedback.xlsx
+output_file=output.xlsx
+mode=SDGs
+feedback_group_name=feedback group
+feedback_point_name=score
+
+# mode : SDGs/inter
