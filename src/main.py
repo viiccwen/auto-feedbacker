@@ -1,23 +1,42 @@
 import pandas as pd
 import numpy as np
+from pathlib import Path
 from test import ShowFeedbackMean, ShowGroupData
 
-# Change to your path, if you change the path to somewhere.
-path = "<your whole path>"
-input_file = "feedback.xlsx"
-output_file = "output.xlsx"
-
-# important: you MUST indicate the mode !!!!
-MODE = "inter" # SDGs or inter
-
-# The column's name of The Group that you feedback.
-feedback_group_name = "feedback group"
-
-# score<x>  ex. score1, score2, score3, ...
-feedback_point_name = "score" 
-
-# The list of group.
+path = ""
+input_file = ""
+output_file = ""
+MODE = ""
+feedback_group_name = ""
+feedback_point_name = "" 
 group = []
+
+def ReadConfig():
+    f = open("src/config.txt", "r")
+    
+    for line in f.readlines():
+        s = line.split("=")
+
+        if s[0] == "path":
+            global path
+            path = s[1].strip()
+        elif s[0] == "input_file":
+            global input_file
+            input_file = s[1].strip()
+        elif s[0] == "output_file":
+            global output_file
+            output_file = s[1].strip()
+        elif s[0] == "mode":
+            global MODE
+            MODE = s[1].strip()
+        elif s[0] == "feedback_group_name":
+            global feedback_group_name
+            feedback_group_name = s[1].strip()
+        elif s[0] == "feedback_point_name":
+            global feedback_point_name
+            feedback_point_name = s[1].strip()
+            
+    f.close()
 
 def ReadFile():
     data = pd.read_excel(f"{path}\\{input_file}")
@@ -73,6 +92,8 @@ def OutputFile(data):
     data.to_excel(f"{path}\\{output_file}", index=False)
     
 if __name__ == '__main__':
+    ReadConfig()
+    
     data = ReadFile()
     
     # let the dataframe groupby
