@@ -12,7 +12,7 @@ feedback_point_name = ""
 group = []
 
 def ReadConfig():
-    f = open("src/config.txt", "r")
+    f = open("config.txt", "r")
     
     for line in f.readlines():
         s = line.split("=")
