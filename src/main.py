@@ -14,9 +14,10 @@ group = []
 def ReadConfig():
     f = open("config.txt", "r")
     
-    for line in f.readlines():
+    for i in range(6):
+        line = f.readline()
         s = line.split("=")
-
+        
         if s[0] == "path":
             global path
             path = s[1].strip()
@@ -50,11 +51,22 @@ def RemoveGroup(data, mod):
     elif mod == "inter":
         data[feedback_group_name] = data[feedback_group_name].str.extract("(?<![a-zA-Z0-9])([A-Z]+\\W*[0-9]+)")
         data[feedback_group_name] = data[feedback_group_name].str.replace("-", "")
-    
+    elif mod == "peer":
+        data[feedback_group_name] = data[feedback_group_name].astype(str)
+    else:
+        print("Error: mode not found")
+        exit()
     return data
         
-def GetFeedbackMean(data, limit):
-    return [data[f'score{i}'].mean() for i in range(1, limit)]
+def GetFeedbackMean(data, mod):
+    if mod == "SDGs" or mod == "inter":
+        return [data[f'score{i}'].mean() for i in range(1, 4 + 1)]
+    elif mod == "peer":
+        return [data[f'score{i}'].mean() for i in range(1, 11 + 1)]
+    else :
+        print("Error: mode not found")
+        exit()
+    
 
 def GetGroupData(data, limit):
     return [data.get_group(i) for i in range(1, limit)]
@@ -104,7 +116,7 @@ if __name__ == '__main__':
     group = GetGroupList(data)
     
     # get the mean value of each group
-    mean_data = GetFeedbackMean(data, 5)
+    mean_data = GetFeedbackMean(data, MODE)
     
     # get the average value of each group
     average_data = GetAverageList(mean_data, group)

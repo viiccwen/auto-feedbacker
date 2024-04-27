@@ -1,9 +1,39 @@
 path=<path>\docs
+input_file=peer.xlsx
+output_file=peer_output.xlsx
+mode=peer
+feedback_group_name=feedback ID
+feedback_point_name=score
+
+
+---------introduce---------
+path : the directory of storing the docs
+mode : SDGs/inter/peer
+
+---------example---------
+SDGs:
+
+path=<path>\docs
 input_file=feedback.xlsx
-output_file=output.xlsx
+output_file=feedback_output.xlsx
 mode=SDGs
 feedback_group_name=feedback group
 feedback_point_name=score
 
-# path : the directory of storing the docs
-# mode : SDGs/inter
+inter:
+
+path=<path>\docs
+input_file=feedback.xlsx
+output_file=feedback_output.xlsx
+mode=inter
+feedback_group_name=feedback group
+feedback_point_name=score
+
+peer:
+
+path=<path>\docs
+input_file=peer.xlsx
+output_file=peer_output.xlsx
+mode=peer
+feedback_group_name=feedback ID
+feedback_point_name=score
